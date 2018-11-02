@@ -6,6 +6,40 @@
 			"type": "LinkedServiceReference"
 		},
 		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "ApplNo",
+				"type": "Int32"
+			},
+			{
+				"name": "ProductNo",
+				"type": "Int32"
+			},
+			{
+				"name": "Form",
+				"type": "String"
+			},
+			{
+				"name": "Strength",
+				"type": "String"
+			},
+			{
+				"name": "ReferenceDrug",
+				"type": "Int32"
+			},
+			{
+				"name": "DrugName",
+				"type": "String"
+			},
+			{
+				"name": "ActiveIngredient",
+				"type": "String"
+			},
+			{
+				"name": "ReferenceStandard",
+				"type": "Int32"
+			}
+		],
 		"typeProperties": {
 			"tableName": "[dbo].[Products]"
 		}

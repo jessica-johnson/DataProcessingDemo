@@ -1,3 +1,56 @@
 {
-	"name": "FDA_Drug_BlobToSQL_Products"
+	"name": "FDA_Drug_BlobToSQL_Products",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Data File to SQL",
+				"type": "Copy",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"source": {
+						"type": "BlobSource",
+						"recursive": false
+					},
+					"sink": {
+						"type": "SqlSink",
+						"writeBatchSize": 10000,
+						"preCopyScript": "TRUNCATE TABLE dbo.Products"
+					},
+					"enableStaging": false,
+					"dataIntegrationUnits": 0,
+					"translator": {
+						"type": "TabularTranslator",
+						"columnMappings": {
+							"ApplNo": "ApplNo",
+							"ProductNo": "ProductNo",
+							"Form": "Form",
+							"Strength": "Strength",
+							"ReferenceDrug": "ReferenceDrug",
+							"DrugName": "DrugName",
+							"ActiveIngredient": "ActiveIngredient",
+							"ReferenceStandard": "ReferenceStandard"
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AzureBlob_File_Products",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSQLDB_Table_Products",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		]
+	}
 }

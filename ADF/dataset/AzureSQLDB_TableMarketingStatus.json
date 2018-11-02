@@ -1,0 +1,27 @@
+{
+	"name": "AzureSQLDB_TableMarketingStatus",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LinkedService_SQLDB",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "MarketingStatusID",
+				"type": "Int32"
+			},
+			{
+				"name": "ApplNo",
+				"type": "Int32"
+			},
+			{
+				"name": "ProductNo",
+				"type": "Int32"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[MarketingStatus]"
+		}
+	}
+}

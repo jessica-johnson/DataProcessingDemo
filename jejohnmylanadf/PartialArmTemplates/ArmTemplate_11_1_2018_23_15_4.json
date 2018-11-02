@@ -1,0 +1,63 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "jejohnmylanadf"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/FDA_Drug_ExtractToBlob')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute Logic App",
+						"description": "Execute Logic App to Get Zip from URL, upload it to Blob, then Extract the Zip contents in Blob",
+						"type": "WebActivity",
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"typeProperties": {
+							"url": "https://prod-31.eastus.logic.azure.com:443/workflows/8f9cbd007822417c91d922f0f856395a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=e5x5Ej9s0M6KqVNOwrSG19dYkrzOiurYakmMg3V7fk4",
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json"
+							},
+							"body": " "
+						}
+					},
+					{
+						"name": "Exec BlobToSQL MarketingStatus",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Execute Logic App",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "BlobToSQL_MarketingStatus",
+								"type": "PipelineReference"
+							}
+						}
+					}
+				]
+			}
+		}
+	]
+}

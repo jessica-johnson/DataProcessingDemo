@@ -194,7 +194,7 @@
 						}
 					},
 					{
-						"name": "Load MarketingStatus",
+						"name": "Exec BlobToSQL MarketingStatus",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{

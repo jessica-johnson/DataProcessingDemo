@@ -1,5 +1,5 @@
 {
-	"name": "AzureBlob",
+	"name": "AzureBlob_File_Products",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LinkedService_jejohnmylanstorage",

@@ -5,6 +5,9 @@
 			"referenceName": "LinkedService_SQLDB",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "SQL DB Datasets"
+		},
 		"type": "AzureSqlTable",
 		"structure": [
 			{

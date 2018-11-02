@@ -5,6 +5,9 @@
 			"referenceName": "LinkedService_jejohnmylanstorage",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Blob Datasets"
+		},
 		"type": "AzureBlob",
 		"structure": [
 			{

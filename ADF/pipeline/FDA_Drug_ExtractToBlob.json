@@ -21,24 +21,6 @@
 					},
 					"body": " "
 				}
-			},
-			{
-				"name": "Load MarketingStatus",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "Execute Logic App",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "BlobToSQL_MarketingStatus",
-						"type": "PipelineReference"
-					}
-				}
 			}
 		]
 	},

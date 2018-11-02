@@ -1,5 +1,5 @@
 {
-	"name": "FDA_Drug_BlobToSQL_Products",
+	"name": "BlobToSQL_Products",
 	"properties": {
 		"activities": [
 			{

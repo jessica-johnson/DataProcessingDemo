@@ -35,7 +35,7 @@
 				],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "FDA_Drug_BlobToSQL_Products",
+						"referenceName": "BlobToSQL_Products",
 						"type": "PipelineReference"
 					}
 				}

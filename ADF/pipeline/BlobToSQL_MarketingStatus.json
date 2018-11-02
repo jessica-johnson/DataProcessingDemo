@@ -14,12 +14,32 @@
 				},
 				"typeProperties": {
 					"source": {
-						"type": "SqlSource"
+						"type": "BlobSource",
+						"recursive": false
+					},
+					"sink": {
+						"type": "SqlSink",
+						"writeBatchSize": 10000,
+						"preCopyScript": "TRUNCATE TABLE dbo.MarketingStatus"
 					},
 					"enableStaging": false,
-					"dataIntegrationUnits": 0
+					"dataIntegrationUnits": 0,
+					"translator": {
+						"type": "TabularTranslator",
+						"columnMappings": {
+							"MarketingStatusID": "MarketingStatusID",
+							"ApplNo": "ApplNo",
+							"ProductNo": "ProductNo"
+						}
+					}
 				},
 				"inputs": [
+					{
+						"referenceName": "AzureBlob_File_MarketingStatus",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
 					{
 						"referenceName": "AzureSQLDB_TableMarketingStatus",
 						"type": "DatasetReference"

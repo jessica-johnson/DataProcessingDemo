@@ -1,0 +1,29 @@
+{
+	"name": "FDA_Drug_Extract",
+	"properties": {
+		"activities": [
+			{
+				"name": "Exec GetURLFile Func",
+				"type": "WebActivity",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"url": "https://jejohnmylanfunc.azurewebsites.net/api/HttpTriggerGetURLFile?code=n0K45mmmOtCmHQwLK3v7jMBt7xssV7rqXJuO2YZRmpCi21n5xO48VA==",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"name": "https://www.fda.gov/downloads/Drugs/InformationOnDrugs/UCM527389.zip"
+					}
+				}
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,27 @@
+{
+	"name": "FDA_Drug_ExtractToBlob",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Logic App",
+				"type": "WebActivity",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"url": "https://prod-31.eastus.logic.azure.com:443/workflows/8f9cbd007822417c91d922f0f856395a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=e5x5Ej9s0M6KqVNOwrSG19dYkrzOiurYakmMg3V7fk4",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": " "
+				}
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

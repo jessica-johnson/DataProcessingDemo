@@ -23,7 +23,7 @@
 				}
 			},
 			{
-				"name": "Execute Pipeline Load Product",
+				"name": "Load MarketingStatus",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -35,7 +35,7 @@
 				],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "BlobToSQL_Products",
+						"referenceName": "BlobToSQL_MarketingStatus",
 						"type": "PipelineReference"
 					}
 				}

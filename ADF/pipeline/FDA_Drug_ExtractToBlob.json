@@ -21,6 +21,24 @@
 					},
 					"body": " "
 				}
+			},
+			{
+				"name": "Execute Pipeline Load Product",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute Logic App",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "FDA_Drug_BlobToSQL_Products",
+						"type": "PipelineReference"
+					}
+				}
 			}
 		]
 	},

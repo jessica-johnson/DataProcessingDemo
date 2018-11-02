@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "Execute Logic App",
+				"description": "Execute Logic App to Get Zip from URL, upload it to Blob, then Extract the Zip contents in Blob",
 				"type": "WebActivity",
 				"policy": {
 					"timeout": "7.00:00:00",

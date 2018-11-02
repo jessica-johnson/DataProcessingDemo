@@ -1,0 +1,13 @@
+{
+	"name": "AzureSQLDB_Table_Products",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LinkedService_SQLDB",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"typeProperties": {
+			"tableName": "[dbo].[Products]"
+		}
+	}
+}

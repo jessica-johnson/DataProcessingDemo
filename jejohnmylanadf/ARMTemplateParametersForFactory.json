@@ -11,6 +11,12 @@
 		"LinkedService_jejohnmylanstorage_connectionString": {
 			"value": ""
 		},
+		"AzureBlob_File_MarketingStatus_properties_typeProperties_fileName": {
+			"value": "MarketingStatus.txt"
+		},
+		"AzureBlob_File_MarketingStatus_properties_typeProperties_folderPath": {
+			"value": "extracts"
+		},
 		"AzureBlob_File_Products_properties_typeProperties_fileName": {
 			"value": "Products.txt"
 		},

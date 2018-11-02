@@ -6,30 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory Name",
 			"defaultValue": "jejohnmylanadf"
-		},
-		"LinkedService_SQLDB_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LinkedService_SQLDB'"
-		},
-		"LinkedService_jejohnmylanstorage_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LinkedService_jejohnmylanstorage'"
-		},
-		"AzureBlob_File_MarketingStatus_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "MarketingStatus.txt"
-		},
-		"AzureBlob_File_MarketingStatus_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "extracts"
-		},
-		"AzureBlob_File_Products_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "Products.txt"
-		},
-		"AzureBlob_File_Products_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "extracts"
 		}
 	},
 	"variables": {
@@ -45,7 +21,6 @@
 					{
 						"name": "Copy Data File to SQL",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -53,7 +28,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "BlobSource",
@@ -78,20 +52,17 @@
 						"inputs": [
 							{
 								"referenceName": "AzureBlob_File_MarketingStatus",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSQLDB_TableMarketingStatus",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
-				],
-				"annotations": []
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzureBlob_File_MarketingStatus')]",
@@ -107,7 +78,6 @@
 					{
 						"name": "Copy Data File to SQL",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -115,7 +85,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "BlobSource",
@@ -145,25 +114,18 @@
 						"inputs": [
 							{
 								"referenceName": "AzureBlob_File_Products",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSQLDB_Table_Products",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AzureBlob_File_Products')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSQLDB_Table_Products')]"
-			]
+				]
+			}
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/FDA_Drug_ExtractToBlob')]",
@@ -175,7 +137,6 @@
 						"name": "Execute Logic App",
 						"description": "Execute Logic App to Get Zip from URL, upload it to Blob, then Extract the Zip contents in Blob",
 						"type": "WebActivity",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -183,7 +144,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"url": "https://prod-31.eastus.logic.azure.com:443/workflows/8f9cbd007822417c91d922f0f856395a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=e5x5Ej9s0M6KqVNOwrSG19dYkrzOiurYakmMg3V7fk4",
 							"method": "POST",
@@ -204,7 +164,6 @@
 								]
 							}
 						],
-						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
 								"referenceName": "BlobToSQL_MarketingStatus",
@@ -212,8 +171,7 @@
 							}
 						}
 					}
-				],
-				"annotations": []
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/BlobToSQL_MarketingStatus')]"
@@ -228,7 +186,6 @@
 					"referenceName": "LinkedService_jejohnmylanstorage",
 					"type": "LinkedServiceReference"
 				},
-				"annotations": [],
 				"type": "AzureBlob",
 				"structure": [
 					{
@@ -255,77 +212,10 @@
 						"skipLineCount": 0,
 						"firstRowAsHeader": true
 					},
-					"fileName": "[parameters('AzureBlob_File_MarketingStatus_properties_typeProperties_fileName')]",
-					"folderPath": "[parameters('AzureBlob_File_MarketingStatus_properties_typeProperties_folderPath')]"
+					"fileName": "MarketingStatus.txt",
+					"folderPath": "extracts"
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LinkedService_jejohnmylanstorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlob_File_Products')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LinkedService_jejohnmylanstorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureBlob",
-				"structure": [
-					{
-						"name": "ApplNo",
-						"type": "Int32"
-					},
-					{
-						"name": "ProductNo",
-						"type": "Int32"
-					},
-					{
-						"name": "Form",
-						"type": "String"
-					},
-					{
-						"name": "Strength",
-						"type": "String"
-					},
-					{
-						"name": "ReferenceDrug",
-						"type": "Int32"
-					},
-					{
-						"name": "DrugName",
-						"type": "String"
-					},
-					{
-						"name": "ActiveIngredient",
-						"type": "String"
-					},
-					{
-						"name": "ReferenceStandard",
-						"type": "Int32"
-					}
-				],
-				"typeProperties": {
-					"format": {
-						"type": "TextFormat",
-						"columnDelimiter": "\t",
-						"rowDelimiter": "",
-						"nullValue": "\\N",
-						"encodingName": null,
-						"treatEmptyAsNull": true,
-						"skipLineCount": 0,
-						"firstRowAsHeader": true
-					},
-					"fileName": "[parameters('AzureBlob_File_Products_properties_typeProperties_fileName')]",
-					"folderPath": "[parameters('AzureBlob_File_Products_properties_typeProperties_folderPath')]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LinkedService_jejohnmylanstorage')]"
-			]
+			}
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSQLDB_TableMarketingStatus')]",
@@ -336,7 +226,6 @@
 					"referenceName": "LinkedService_SQLDB",
 					"type": "LinkedServiceReference"
 				},
-				"annotations": [],
 				"type": "AzureSqlTable",
 				"structure": [
 					{
@@ -355,89 +244,7 @@
 				"typeProperties": {
 					"tableName": "[concat('[', 'dbo].[MarketingStatus]')]"
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LinkedService_SQLDB')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSQLDB_Table_Products')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LinkedService_SQLDB",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"structure": [
-					{
-						"name": "ApplNo",
-						"type": "Int32"
-					},
-					{
-						"name": "ProductNo",
-						"type": "Int32"
-					},
-					{
-						"name": "Form",
-						"type": "String"
-					},
-					{
-						"name": "Strength",
-						"type": "String"
-					},
-					{
-						"name": "ReferenceDrug",
-						"type": "Int32"
-					},
-					{
-						"name": "DrugName",
-						"type": "String"
-					},
-					{
-						"name": "ActiveIngredient",
-						"type": "String"
-					},
-					{
-						"name": "ReferenceStandard",
-						"type": "Int32"
-					}
-				],
-				"typeProperties": {
-					"tableName": "[concat('[', 'dbo].[Products]')]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LinkedService_SQLDB')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LinkedService_SQLDB')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('LinkedService_SQLDB_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LinkedService_jejohnmylanstorage')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('LinkedService_jejohnmylanstorage_connectionString')]"
-				}
-			},
-			"dependsOn": []
+			}
 		}
 	]
 }

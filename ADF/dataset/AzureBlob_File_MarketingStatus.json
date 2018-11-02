@@ -1,0 +1,38 @@
+{
+	"name": "AzureBlob_File_MarketingStatus",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LinkedService_jejohnmylanstorage",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"structure": [
+			{
+				"name": "MarketingStatusID",
+				"type": "Int32"
+			},
+			{
+				"name": "ApplNo",
+				"type": "Int32"
+			},
+			{
+				"name": "ProductNo",
+				"type": "Int32"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": "\t",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"encodingName": null,
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": "MarketingStatus.txt",
+			"folderPath": "extracts"
+		}
+	}
+}
